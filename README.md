@@ -2,5 +2,6 @@
 
 ## Libraries used
 * tokio: Async Rust runtime
-* ron: Reading (deserializing) .ron files
-* serde: Deserialize derive for ron
+* tokio-tungstenite: Websocket client
+* ron: Reading & parsing .ron files
+* serde: `#[derive(Deserialize)]`
