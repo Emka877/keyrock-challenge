@@ -1,0 +1,17 @@
+name: Rust
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLORS: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+      # --nocapture allows println to actually print smth inside tests
+      - run: cargo test --verbose -- --nocapture
