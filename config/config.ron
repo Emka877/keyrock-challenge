@@ -1,0 +1,6 @@
+// Reminder, remove this file from Git if sensitive info is pushed
+
+AppConfig (
+    // The default currencies pair to fetch from the exchanges
+    currency_pair: "ETHBTC",
+)
