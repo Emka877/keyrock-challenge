@@ -4,7 +4,7 @@ use tokio_tungstenite::tungstenite::protocol::WebSocketConfig;
 use tokio_tungstenite::{connect_async_tls_with_config, MaybeTlsStream, WebSocketStream};
 use crate::exceptions::OpenStreamError;
 
-use super::models::ExchangeEndpoint;
+use super::endpoints::ExchangeEndpoint;
 
 pub async fn open_stream_to_exchange(exchange: ExchangeEndpoint) -> Result<WebSocketStream<MaybeTlsStream<TcpStream>>, OpenStreamError> {
     let connect_endpoint: String = exchange.to_string();
