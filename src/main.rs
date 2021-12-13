@@ -14,5 +14,9 @@ use exchanges::{open_stream_to_exchange, ExchangeEndpoint};
 
 #[tokio::main]
 async fn main() {
+    let mut bitstamp_stream = open_stream_to_exchange(ExchangeEndpoint::Bitstamp).await.expect("Cannot open stream to Bitstamp");
+    let mut binance_stream = open_stream_to_exchange(ExchangeEndpoint::Binance).await.expect("Could open stream to Binance");
     
+    let _ = binance_stream.close(None).await;
+    let _ = bitstamp_stream.close(None).await;
 }
