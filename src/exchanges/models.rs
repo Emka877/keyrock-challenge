@@ -1,6 +1,5 @@
 use crate::configuration::APP_CONFIG;
 
-/// Available exchanges for the challenge
 /*
  Note
  ----
@@ -9,8 +8,11 @@ use crate::configuration::APP_CONFIG;
 
  The goal would be to add(/remove) exchanges on the fly, if needed. (Otherwise this solution is viable)
  */
+
+/// Available exchanges for the challenge
 #[derive(Debug)]
 #[repr(u32)]
+#[allow(dead_code)]
 pub enum ExchangeEndpoint {
     Binance = 0,
     Bitstamp = 1,
