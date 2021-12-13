@@ -1,5 +1,6 @@
 use std::fmt::Formatter;
 
+/// Error while reading the app configuration file
 #[derive(Debug)]
 pub struct ConfigurationReadError {
     cause: String,
