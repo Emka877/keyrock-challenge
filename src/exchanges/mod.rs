@@ -1,6 +1,9 @@
 /// Module containing exchanges connection functions
 mod stream;
-mod models;
+mod endpoints;
+/// Contains the different data models for each Exchange
+mod data;
 
 pub use stream::*;
-pub use models::*;
+pub use endpoints::*;
+pub use data::*;
