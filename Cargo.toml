@@ -1,0 +1,13 @@
+[package]
+name = "keyrock-assignment"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Async/await
+tokio = { version = "1.14.0", features = ["macros", "rt-multi-thread", "tokio-macros"] }
+
+# Websocket connection to exchange
+tokio-tungstenite = "0.16.1"
+
+# gRPC server + protobuf
