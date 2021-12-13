@@ -1,6 +1,6 @@
 /// Module containing exchanges connection functions
-mod connection;
+mod stream;
 mod models;
 
-pub use connection::*;
+pub use stream::*;
 pub use models::*;
