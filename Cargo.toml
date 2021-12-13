@@ -4,14 +4,18 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+# Configuration files
+ron = "0.7.0"
+serde = "1.0.131"
+
 # Async/await
 tokio = { version = "1.14.0", features = ["macros", "rt-multi-thread", "tokio-macros"] }
 
 # Websocket connection to exchange
-tokio-tungstenite = "0.16.1"
+tokio-tungstenite = { version = "0.16.1", features = ["native-tls", "connect"]}
 
 # gRPC server + protobuf
 
-# Configuration files
-ron = "0.7.0"
-serde = "1.0.131"
+# Other
+lazy_static = "1.4.0"
+url = "2.2.2"
