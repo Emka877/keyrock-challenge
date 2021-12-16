@@ -1,9 +1,8 @@
-mod binance;
-mod bitstamp;
-mod trait_exchange;
+mod binance_data;
+mod bitstamp_data;
 mod normalized_exchange_data;
 
-pub use binance::*;
-pub use bitstamp::*;
-pub use trait_exchange::*;
+pub use binance_data::*;
+pub use bitstamp_data::*;
+pub use crate::exchanges::exchange::trait_exchange::*;
 pub use normalized_exchange_data::*;

@@ -1,11 +1,9 @@
-use serde::Deserialize;
-use tungstenite::Message;
-use crate::exceptions::StreamSubscriptionError;
-use crate::exchanges::data::trait_exchange::Exchange;
-use crate::ExchangeWsTcpStream;
 use async_trait::async_trait;
 use futures::{SinkExt, StreamExt};
+use tungstenite::Message;
+use crate::{Exchange, ExchangeWsTcpStream};
 use crate::configuration::APP_CONFIG;
+use crate::exceptions::StreamSubscriptionError;
 
 /// Represents the Bitstamp exchange
 pub struct Bitstamp;
@@ -25,33 +23,4 @@ impl Exchange for Bitstamp {
         }
         Ok(Some(active_stream.next().await.unwrap().unwrap()))
     }
-}
-
-/// Represents data coming from the Bitstamp Exchange
-#[derive(Debug, Clone, Deserialize)]
-#[allow(dead_code)]
-pub struct BitstampData {
-    data: BitstampExtraData,
-    channel: String,
-    event: String,
-}
-
-/*** Bitstamp data composition members are below ***/
-
-#[derive(Debug, Clone, Deserialize)]
-#[allow(dead_code)]
-pub struct BitstampExtraData {
-    timestamp: String,
-    microtimestamp: String,
-    bids: Vec<Vec<String>>,
-    asks: Vec<Vec<String>>,
-}
-
-#[derive(Debug, Clone, Deserialize)]
-#[allow(dead_code)]
-pub struct BitstampSubscription {
-    event: String,
-    channel: String,
-    #[serde(skip_deserializing)]
-    data: (),
 }
