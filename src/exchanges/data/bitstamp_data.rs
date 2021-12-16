@@ -1,5 +1,4 @@
 use serde::Deserialize;
-use futures::StreamExt;
 
 /// Represents data coming from the Bitstamp Exchange
 #[derive(Debug, Clone, Deserialize)]
