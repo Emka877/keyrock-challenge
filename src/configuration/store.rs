@@ -9,9 +9,8 @@ use super::functions::read_configuration_file;
 fn initialize_config_store() -> AppConfig {
     let app_config: Result<AppConfig, ConfigurationReadError> = read_configuration_file();
 
-    // TODO: handle this more gracefully, so the app doesn't just bail.
     if app_config.is_err() {
-        std::process::exit(1);
+        return AppConfig::default();
     }
 
     app_config.unwrap()
