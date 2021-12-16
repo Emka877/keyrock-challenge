@@ -1,10 +1,5 @@
 use serde::Deserialize;
-use tungstenite::Message;
-use crate::exceptions::StreamSubscriptionError;
-use crate::ExchangeWsTcpStream;
-use async_trait::async_trait;
-use futures::{SinkExt, StreamExt};
-use crate::configuration::APP_CONFIG;
+use futures::StreamExt;
 
 /// Represents data coming from the Bitstamp Exchange
 #[derive(Debug, Clone, Deserialize)]
