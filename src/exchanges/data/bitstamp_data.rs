@@ -10,9 +10,9 @@ use crate::configuration::APP_CONFIG;
 #[derive(Debug, Clone, Deserialize)]
 #[allow(dead_code)]
 pub struct BitstampData {
-    data: BitstampExtraData,
-    channel: String,
-    event: String,
+    pub data: BitstampExtraData,
+    pub channel: String,
+    pub event: String,
 }
 
 /*** Bitstamp data composition members are below ***/
@@ -20,17 +20,17 @@ pub struct BitstampData {
 #[derive(Debug, Clone, Deserialize)]
 #[allow(dead_code)]
 pub struct BitstampExtraData {
-    timestamp: String,
-    microtimestamp: String,
-    bids: Vec<Vec<String>>,
-    asks: Vec<Vec<String>>,
+    pub timestamp: String,
+    pub microtimestamp: String,
+    pub bids: Vec<Vec<String>>,
+    pub asks: Vec<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
 #[allow(dead_code)]
 pub struct BitstampSubscription {
-    event: String,
-    channel: String,
+    pub event: String,
+    pub channel: String,
     #[serde(skip_deserializing)]
-    data: (),
+    pub data: (),
 }

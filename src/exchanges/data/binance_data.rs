@@ -8,10 +8,8 @@ use crate::exceptions::StreamSubscriptionError;
 #[derive(Debug, Clone, Deserialize)]
 #[allow(dead_code)]
 pub struct BinanceData {
-    #[serde(skip)]
-    exchange: String,
     #[serde(rename = "lastUpdateId")]
-    last_update_id: serde_json::Number,
-    bids: Vec<Vec<String>>,
-    asks: Vec<Vec<String>>,
+    pub last_update_id: serde_json::Number,
+    pub bids: Vec<Vec<String>>,
+    pub asks: Vec<Vec<String>>,
 }
