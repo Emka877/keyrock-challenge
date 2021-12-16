@@ -1,2 +1,2 @@
 pub mod configuration;
-pub mod exchanges_streams;
+pub mod exchanges;
