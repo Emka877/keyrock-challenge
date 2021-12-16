@@ -29,6 +29,7 @@ async fn main() {
             // Shadowing previous var
             let bitstamp_message = bitstamp_message.unwrap().unwrap();
             let bitstamp_data: BitstampData = serde_json::from_str(bitstamp_message.to_string().as_str()).unwrap();
+            println!("{:?}", bitstamp_data);
         }
 
         let binance_message = binance.next().await;

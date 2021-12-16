@@ -1,11 +1,13 @@
 use crate::{BinanceData, BitstampData};
 
+#[allow(dead_code)]
 pub struct NormalizedExchangeData {
     exchange: String,
     asks: Vec<ExchangePriceAmountPair>,
     bids: Vec<ExchangePriceAmountPair>,
 }
 
+#[allow(dead_code)]
 pub struct ExchangePriceAmountPair {
     price: f32,
     amount: f32,

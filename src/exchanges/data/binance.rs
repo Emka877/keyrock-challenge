@@ -10,7 +10,7 @@ pub struct Binance;
 
 #[async_trait]
 impl Exchange for Binance {
-    async fn subscribe_to_orderbook_stream(active_stream: &mut ExchangeWsTcpStream) -> Result<Option<Message>, StreamSubscriptionError> {
+    async fn subscribe_to_orderbook_stream(_: &mut ExchangeWsTcpStream) -> Result<Option<Message>, StreamSubscriptionError> {
         // Binance's URL already connects the stream to the right subscription
         Ok(None)
     }
@@ -18,6 +18,7 @@ impl Exchange for Binance {
 
 /// Represents data coming from the Binance Exchange
 #[derive(Debug, Clone, Deserialize)]
+#[allow(dead_code)]
 pub struct BinanceData {
     #[serde(skip)]
     exchange: String,
@@ -26,14 +27,3 @@ pub struct BinanceData {
     bids: Vec<Vec<String>>,
     asks: Vec<Vec<String>>,
 }
-
-// impl Default for BinanceData {
-//     fn default() -> Self {
-//         Self {
-//             exchange: "binance".to_owned(),
-//             last_update_id: serde_json::Number::from(0),
-//             bids: vec!(),
-//             asks: vec!(),
-//         }
-//     }
-// }

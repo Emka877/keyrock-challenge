@@ -7,7 +7,7 @@ pub struct StreamSubscriptionError {
 
 impl std::fmt::Display for StreamSubscriptionError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        todo!()
+        write!(f, "Could not subscribe to stream: {}", self.cause)
     }
 }
 

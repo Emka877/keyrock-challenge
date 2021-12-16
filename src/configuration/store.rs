@@ -17,7 +17,7 @@ fn initialize_config_store() -> AppConfig {
     app_config.unwrap()
 }
 
-/// Store containing the live app configuration
+// Store containing the live app configuration
 lazy_static!(
     pub static ref APP_CONFIG: AppConfig = initialize_config_store();
 );

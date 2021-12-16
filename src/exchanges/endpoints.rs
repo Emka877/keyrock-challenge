@@ -24,7 +24,7 @@ impl std::fmt::Display for ExchangeEndpoint {
 
         let exchange_endpoint: String = match *self {
             ExchangeEndpoint::Binance => format!("wss://stream.binance.com:9443/ws/{}@depth20@100ms", currency_pair),
-            ExchangeEndpoint::Bitstamp => format!("wss://ws.bitstamp.net/"),
+            ExchangeEndpoint::Bitstamp => "wss://ws.bitstamp.net/".to_owned(),
         };
 
         write!(f, "{}", exchange_endpoint)
