@@ -14,11 +14,12 @@ tokio = { version = "1.14.0", features = ["full"] }
 # Websocket connection to exchange
 tokio-tungstenite = { version = "0.16.1", features = ["native-tls"] }
 tungstenite = { version = "0.16.0", default-features = false }
-futures = "0.3.18"
+futures = "0.3.17"
 
 # gRPC server + protobuf
 
 # Other
 lazy_static = "1.4.0"
 url = "2.2.2"
-serde_json = "1.0.72"
+serde_json = "1.0.73"
+async-trait = "0.1.52"
