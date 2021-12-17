@@ -13,7 +13,7 @@ mod orderbook;
 use exchanges::{open_stream_to_exchange, ExchangeEndpoint};
 use futures::StreamExt;
 
-use crate::exchanges::{Binance, BinanceData, Bitstamp, BitstampData, Exchange, ExchangeWsTcpStream};
+use crate::exchanges::{Binance, BinanceData, Bitstamp, BitstampData, Exchange, ExchangeWsTcpStream, NormalizedExchangeData};
 
 #[tokio::main]
 async fn main() {
@@ -29,14 +29,16 @@ async fn main() {
             // Shadowing previous var
             let bitstamp_message = bitstamp_message.unwrap().unwrap();
             let bitstamp_data: BitstampData = serde_json::from_str(bitstamp_message.to_string().as_str()).unwrap();
-            println!("{:?}", bitstamp_data);
+            let normalized: NormalizedExchangeData = bitstamp_data.into();
+            println!("{:?}", normalized);
         }
 
         let binance_message = binance.next().await;
         if binance_message.is_some() && binance_message.as_ref().unwrap().is_ok() {
             let binance_message = binance_message.unwrap().unwrap();
             let binance_data: BinanceData = serde_json::from_str(binance_message.to_text().unwrap()).unwrap();
-            println!("{:?}", binance_data);
+            let normalized: NormalizedExchangeData = binance_data.into();
+            println!("{:?}", normalized);
         }
     }
 }
