@@ -13,7 +13,8 @@ mod orderbook;
 use exchanges::{open_stream_to_exchange, ExchangeEndpoint};
 use futures::StreamExt;
 
-use crate::exchanges::{Binance, BinanceData, Bitstamp, BitstampData, Exchange, ExchangeWsTcpStream, NormalizedExchangeData};
+use crate::exchanges::{Binance, BinanceData, Bitstamp, BitstampData, Exchange, ExchangeWsTcpStream};
+use crate::orderbook::NormalizedExchangeData;
 
 #[tokio::main]
 async fn main() {
