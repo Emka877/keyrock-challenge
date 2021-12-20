@@ -3,16 +3,16 @@ use crate::{BinanceData, BitstampData};
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct NormalizedExchangeData {
-    exchange: String,
-    asks: Vec<ExchangePriceAmountPair>,
-    bids: Vec<ExchangePriceAmountPair>,
+    pub exchange: String,
+    pub asks: Vec<ExchangePriceAmountPair>,
+    pub bids: Vec<ExchangePriceAmountPair>,
 }
 
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct ExchangePriceAmountPair {
-    price: f32,
-    amount: f32,
+    pub price: f32,
+    pub amount: f32,
 }
 
 impl From<&Vec<String>> for ExchangePriceAmountPair {
