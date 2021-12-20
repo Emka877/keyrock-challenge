@@ -1,4 +1,5 @@
 use std::cmp::Ordering;
+use std::fmt::Formatter;
 
 #[derive(Debug, Clone)]
 pub struct Level {
@@ -8,12 +9,18 @@ pub struct Level {
 }
 
 impl Level {
-    pub fn new(exchange: String, price: f32, amount: f32) -> Self {
+    pub fn new(exchange: &str, price: f32, amount: f32) -> Self {
         Self {
-            exchange,
+            exchange: exchange.to_owned(),
             price,
             amount,
         }
+    }
+}
+
+impl std::fmt::Display for Level {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "(from {}) pr: {}, amt: {}", self.exchange.to_uppercase(), self.price, self.amount)
     }
 }
 
