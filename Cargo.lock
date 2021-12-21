@@ -461,7 +461,6 @@ checksum = "1aab8fc367588b89dcee83ab0fd66b72b50b72fa1904d7095045ace2b0c81c35"
 name = "keyrock-assignment"
 version = "0.1.0"
 dependencies = [
- "async-stream",
  "async-trait",
  "fast-float",
  "futures",
@@ -471,6 +470,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+ "tokio-stream",
  "tokio-tungstenite",
  "tonic",
  "tonic-build",
