@@ -9,7 +9,7 @@ ron = "0.7.0"
 serde = "1.0.131"
 
 # Async/await
-tokio = { version = "1.14.0", features = ["full"] }
+tokio = { version = "1.15.0", features = ["full"] }
 
 # Websocket connection to exchange
 tokio-tungstenite = { version = "0.16.1", features = ["native-tls"] }
