@@ -2,7 +2,7 @@ use std::fmt::Formatter;
 use crate::grpc::orderbook::{Level, NormalizedExchangeData};
 
 /// Represents the merged orderbook that's going to be streamed over the gRPC server.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Summary {
     currency_pair: String,
     asks: Vec<Level>,
