@@ -2,11 +2,11 @@
 
 use std::fs::File;
 use std::path::PathBuf;
-use crate::{BinanceData, BitstampData, NormalizedExchangeData, Summary};
+use crate::{BinanceData, BitstampData, NormalizedExchangeData, LocalSummary};
 
 /// Reads the mock data for both exchanges (see mock files in the "mocks" folder)
-pub fn read_all_mock_data() -> Summary {
-    let mut summary: Summary = Summary::new("ethbtc");
+pub fn read_all_mock_data() -> LocalSummary {
+    let mut summary: LocalSummary = LocalSummary::new("ethbtc");
 
     // TODO: DRY
 

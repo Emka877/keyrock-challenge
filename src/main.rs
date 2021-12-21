@@ -13,7 +13,7 @@ use futures::StreamExt;
 use crate::configuration::APP_CONFIG;
 
 use crate::exchanges::{Binance, BinanceData, Bitstamp, BitstampData, Exchange, ExchangeWsTcpStream};
-use crate::grpc::orderbook::{NormalizedExchangeData, Summary};
+use crate::grpc::orderbook::{NormalizedExchangeData, LocalSummary};
 
 #[tokio::main]
 async fn main() {
@@ -23,7 +23,7 @@ async fn main() {
     let _ = Binance::subscribe_to_orderbook_stream(&mut binance).await;
 
     loop {
-        let mut final_orderbook: Summary = Summary::new(APP_CONFIG.currency_pair.clone().as_str());
+        let mut final_orderbook: LocalSummary = LocalSummary::new(APP_CONFIG.currency_pair.clone().as_str());
 
         let binance_message = binance.next().await;
         if binance_message.is_some() && binance_message.as_ref().unwrap().is_ok() {

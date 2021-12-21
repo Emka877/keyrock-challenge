@@ -2,13 +2,13 @@ use std::cmp::Ordering;
 use std::fmt::Formatter;
 
 #[derive(Debug, Clone)]
-pub struct Level {
+pub struct LocalLevel {
     pub exchange: String,
     pub price: f32,
     pub amount: f32,
 }
 
-impl Level {
+impl LocalLevel {
     pub fn new(exchange: &str, price: f32, amount: f32) -> Self {
         Self {
             exchange: exchange.to_owned(),
@@ -18,21 +18,21 @@ impl Level {
     }
 }
 
-impl std::fmt::Display for Level {
+impl std::fmt::Display for LocalLevel {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "(from {}) pr: {}, amt: {}", self.exchange.to_uppercase(), self.price, self.amount)
     }
 }
 
-impl PartialEq for Level {
+impl PartialEq for LocalLevel {
     fn eq(&self, other: &Self) -> bool {
         self.price == other.price && self.amount == other.amount
     }
 }
 
-impl Eq for Level {}
+impl Eq for LocalLevel {}
 
-impl PartialOrd for Level {
+impl PartialOrd for LocalLevel {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         match self.price.partial_cmp(&other.price).unwrap() {
             Ordering::Less => {
@@ -74,7 +74,7 @@ impl PartialOrd for Level {
     }
 }
 
-impl Ord for Level {
+impl Ord for LocalLevel {
     fn cmp(&self, other: &Self) -> Ordering {
         match self.price.partial_cmp(&other.price).unwrap() {
             Ordering::Less => {

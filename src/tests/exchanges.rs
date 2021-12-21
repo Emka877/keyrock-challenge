@@ -1,7 +1,7 @@
 use crate::{exchanges::{
     ExchangeEndpoint,
     open_stream_to_exchange,
-}, exceptions::OpenStreamError, ExchangeWsTcpStream, Bitstamp, Binance, NormalizedExchangeData, Summary};
+}, exceptions::OpenStreamError, ExchangeWsTcpStream, Bitstamp, Binance, NormalizedExchangeData, LocalSummary};
 use crate::exchanges::Exchange;
 use futures::{SinkExt, StreamExt};
 use tungstenite::Message;
@@ -58,7 +58,7 @@ pub async fn test_subscribing_to_exchange_orderbook() {
 #[test]
 pub fn test_data_sorting_correctness() {
     // Read the mock data (actually coming from both Bitstamp and Binance)
-    let mut data: Summary = read_all_mock_data();
+    let mut data: LocalSummary = read_all_mock_data();
     // Check if we got enough data (100 from Bitstamp, 20 from Binance)
     assert_eq!(data.get_asks().len(), 120);
     assert_eq!(data.get_bids().len(), 120);
