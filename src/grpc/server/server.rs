@@ -14,6 +14,6 @@ impl OrderbookAggregator for OrderbookServer {
         Pin<Box<dyn Stream<Item = Result<Summary, Status>> + Send + Sync + 'static>>;
 
     async fn book_summary(&self, request: Request<Empty>) -> Result<Response<Self::BookSummaryStream>, Status> {
-        todo!()
+        unimplemented!()
     }
 }
