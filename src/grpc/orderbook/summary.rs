@@ -37,11 +37,12 @@ impl Summary {
     }
 
     /// Sorts both asks and bids by price then by amount traded
+    // Note: In Rust, Vecs are sorted from smallest to largest
     fn sort(&mut self) {
         self.bids.sort();
+        // Reverse because we want the highest bids first
+        self.bids.reverse();
         self.asks.sort();
-        let reverse_asks: Vec<Level> = self.asks.clone().into_iter().rev().collect();
-        self.asks = reverse_asks;
     }
 
     /// Trims the amount of asks and bids to 10 each
@@ -61,6 +62,8 @@ impl Summary {
     }
 }
 
+// Don't use, very slow
+//
 // impl std::fmt::Display for Summary {
 //     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
 //         let mut message: String = format!("Currency pair: {}", self.currency_pair);

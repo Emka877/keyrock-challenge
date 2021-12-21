@@ -34,14 +34,22 @@ impl Eq for Level {}
 
 impl PartialOrd for Level {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        if self.price > other.price {
-            return Some(Ordering::Greater);
-        } else if self.price == other.price && self.amount > other.amount {
-            return Some(Ordering::Greater);
-        } else if self.price == other.price && self.amount == other.amount {
-            return Some(Ordering::Equal);
+        match self.price.partial_cmp(&other.price).unwrap() {
+            Ordering::Less => {
+                Some(Ordering::Less)
+            }
+            Ordering::Equal => {
+                if self.amount > other.amount {
+                    return Some(Ordering::Greater);
+                } else if self.amount == other.amount {
+                    return Some(Ordering::Equal);
+                }
+                Some(Ordering::Less)
+            }
+            Ordering::Greater => {
+                Some(Ordering::Greater)
+            }
         }
-        Some(Ordering::Less)
     }
 
     fn lt(&self, other: &Self) -> bool {
@@ -68,13 +76,21 @@ impl PartialOrd for Level {
 
 impl Ord for Level {
     fn cmp(&self, other: &Self) -> Ordering {
-        if self.price > other.price {
-            return Ordering::Greater;
-        } else if self.price == other.price && self.amount > other.amount {
-            return Ordering::Greater;
-        } else if self.price == other.price && self.amount == other.amount {
-            return Ordering::Equal;
+        match self.price.partial_cmp(&other.price).unwrap() {
+            Ordering::Less => {
+                Ordering::Less
+            }
+            Ordering::Equal => {
+                if self.amount > other.amount {
+                    return Ordering::Greater;
+                } else if self.amount == other.amount {
+                    return Ordering::Equal;
+                }
+                Ordering::Less
+            }
+            Ordering::Greater => {
+                Ordering::Greater
+            }
         }
-        Ordering::Less
     }
 }

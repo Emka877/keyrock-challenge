@@ -60,8 +60,9 @@ async fn main() {
             final_orderbook.push(normalized);
         }
 
+        // println!("{:?}", final_orderbook);
         final_orderbook.merge();
-        println!("{:?}", final_orderbook);
+        // println!("{:?}", final_orderbook);
         // TODO: Relay to grpc server
     }
 }
