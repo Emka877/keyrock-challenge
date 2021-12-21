@@ -31,14 +31,14 @@ impl Summary {
         self.asks.append(&mut new_asks);
     }
 
-    pub fn merge(&mut self) {
+    pub fn prepare(&mut self) {
         self.sort();
         self.trim();
     }
 
     /// Sorts both asks and bids by price then by amount traded
     // Note: In Rust, Vecs are sorted from smallest to largest
-    fn sort(&mut self) {
+    pub fn sort(&mut self) {
         self.bids.sort();
         // Reverse because we want the highest bids first
         self.bids.reverse();
@@ -59,6 +59,14 @@ impl Summary {
         let top_ask: &Level = self.asks.get(0).unwrap();
         let top_bid: &Level = self.bids.get(0).unwrap();
         top_ask.price - top_bid.price
+    }
+
+    pub fn get_asks(&self) -> Vec<Level> {
+        self.asks.clone()
+    }
+
+    pub fn get_bids(&self) -> Vec<Level> {
+        self.bids.clone()
     }
 }
 

@@ -61,7 +61,7 @@ async fn main() {
         }
 
         // println!("{:?}", final_orderbook);
-        final_orderbook.merge();
+        final_orderbook.prepare();
         // println!("{:?}", final_orderbook);
         // TODO: Relay to grpc server
     }
