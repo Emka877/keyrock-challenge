@@ -20,6 +20,7 @@ futures = "0.3.17"
 serde_json = "1.0.73"
 
 # gRPC server + protobuf
+tonic = "0.6.2"
 
 # Other
 lazy_static = "1.4.0"
