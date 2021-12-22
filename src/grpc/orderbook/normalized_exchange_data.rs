@@ -11,15 +11,15 @@ pub struct NormalizedExchangeData {
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct ExchangePriceAmountPair {
-    pub price: f32,
-    pub amount: f32,
+    pub price: f64,
+    pub amount: f64,
 }
 
 impl From<&Vec<String>> for ExchangePriceAmountPair {
     fn from(source: &Vec<String>) -> Self {
         // TODO: Handle the eventual errors
-        let price = fast_float::parse::<f32, _>(source.get(0).as_ref().unwrap()).unwrap();
-        let amount = fast_float::parse::<f32, _>(source.get(1).as_ref().unwrap()).unwrap();
+        let price = fast_float::parse::<f64, _>(source.get(0).as_ref().unwrap()).unwrap();
+        let amount = fast_float::parse::<f64, _>(source.get(1).as_ref().unwrap()).unwrap();
         Self {
             price,
             amount,

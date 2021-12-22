@@ -1,15 +1,16 @@
 use std::cmp::Ordering;
 use std::fmt::Formatter;
+use crate::grpc::server::orderbook::Level;
 
 #[derive(Debug, Clone)]
 pub struct LocalLevel {
     pub exchange: String,
-    pub price: f32,
-    pub amount: f32,
+    pub price: f64,
+    pub amount: f64,
 }
 
 impl LocalLevel {
-    pub fn new(exchange: &str, price: f32, amount: f32) -> Self {
+    pub fn new(exchange: &str, price: f64, amount: f64) -> Self {
         Self {
             exchange: exchange.to_owned(),
             price,
@@ -91,6 +92,16 @@ impl Ord for LocalLevel {
             Ordering::Greater => {
                 Ordering::Greater
             }
+        }
+    }
+}
+
+impl Into<Level> for LocalLevel {
+    fn into(self) -> Level {
+        Level {
+            exchange: self.exchange.clone(),
+            price: self.price,
+            amount: self.amount
         }
     }
 }

@@ -3,9 +3,9 @@ use crate::grpc::orderbook::{LocalLevel, NormalizedExchangeData};
 /// Represents the merged orderbook that's going to be streamed over the gRPC server.
 #[derive(Debug, Clone)]
 pub struct LocalSummary {
-    currency_pair: String,
-    asks: Vec<LocalLevel>,
-    bids: Vec<LocalLevel>,
+    pub currency_pair: String,
+    pub asks: Vec<LocalLevel>,
+    pub bids: Vec<LocalLevel>,
 }
 
 impl LocalSummary {
@@ -51,7 +51,7 @@ impl LocalSummary {
     }
 
     /// Calculates the spread between top ask and top bid
-    pub fn spread(&self) -> f32 {
+    pub fn spread(&self) -> f64 {
         if self.asks.is_empty() || self.bids.is_empty() {
             return 0.0;
         }

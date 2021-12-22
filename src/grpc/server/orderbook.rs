@@ -1,3 +1,6 @@
+use crate::grpc::orderbook::LocalLevel;
+use crate::LocalSummary;
+
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Empty {}
 
@@ -13,6 +16,20 @@ pub struct Summary {
     pub asks: ::prost::alloc::vec::Vec<Level>,
 }
 
+impl From<LocalSummary> for Summary {
+    fn from(src: LocalSummary) -> Self {
+        Self {
+            spread: src.spread(),
+
+            bids: src.bids.iter().map(|x| {
+                x.clone().into()
+            }).collect(),
+
+            asks: src.asks.iter().map(|x| { x.clone().into() }).collect(),
+        }
+    }
+}
+
 /// Represents a single Bid or Ask
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Level {
@@ -22,6 +39,16 @@ pub struct Level {
     pub price: f64,
     #[prost(double, tag = "3")]
     pub amount: f64,
+}
+
+impl From<LocalLevel> for Level {
+    fn from(src: LocalLevel) -> Self {
+        Self {
+            exchange: src.exchange.clone(),
+            price: src.price,
+            amount: src.amount
+        }
+    }
 }
 
 #[doc = r" Generated client implementations."]
