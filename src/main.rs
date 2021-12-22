@@ -7,6 +7,8 @@ mod configuration;
 mod grpc;
 /// Contains everything related to fetching the data from the remote exchanges
 mod exchanges;
+/// Persists the merged orderbook in RAM, in order to serve it via the gRPC server
+mod persistence;
 
 use exchanges::{open_stream_to_exchange, ExchangeEndpoint};
 use futures::StreamExt;
@@ -60,9 +62,7 @@ async fn main() {
             final_orderbook.push(normalized);
         }
 
-        // println!("{:?}", final_orderbook);
         final_orderbook.prepare();
-        // println!("{:?}", final_orderbook);
-        // TODO: Relay to grpc server
+        persistence::store::update_merged_orderbook(final_orderbook);
     }
 }
