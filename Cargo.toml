@@ -3,10 +3,14 @@ name = "keyrock-assignment"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "backend"
+path = "src/backend/main.rs"
+
 [dependencies]
 # Configuration files
 ron = "0.7.0"
-serde = "1.0.131"
+serde = "1.0.132"
 
 # Async/await
 tokio = { version = "1.15.0", features = ["full"] }
@@ -14,7 +18,7 @@ tokio = { version = "1.15.0", features = ["full"] }
 # Websocket connection to exchange
 tokio-tungstenite = { version = "0.16.1", features = ["native-tls"] }
 tungstenite = { version = "0.16.0", default-features = false }
-futures = "0.3.17"
+futures = "0.3.19"
 
 # Parsing data from the exchanges
 serde_json = "1.0.73"
