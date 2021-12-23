@@ -3,10 +3,6 @@ name = "keyrock-assignment"
 version = "0.1.0"
 edition = "2021"
 
-[[bin]]
-name = "backend"
-path = "src/backend/main.rs"
-
 [dependencies]
 # Configuration files
 ron = "0.7.0"
@@ -27,6 +23,9 @@ serde_json = "1.0.73"
 tonic = "0.6.2"
 prost = "0.9.0"
 tokio-stream = "0.1.8"
+
+# Frontend
+iced = "0.3.0"
 
 # Other
 lazy_static = "1.4.0"

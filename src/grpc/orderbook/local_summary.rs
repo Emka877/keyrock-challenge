@@ -57,7 +57,10 @@ impl LocalSummary {
         }
         let top_ask: f64 = self.asks.get(0).unwrap().price;
         let top_bid: f64 = self.bids.get(0).unwrap().price;
-        top_ask - top_bid
+        let spread: f64 = top_ask - top_bid;
+        let fp_precision: f64 = 10.0_f64.powf(10.0);
+
+        (spread * fp_precision as f64).round() / fp_precision
     }
 
     pub fn get_asks(&self) -> Vec<LocalLevel> {
