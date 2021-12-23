@@ -6,7 +6,7 @@ use crate::configuration::datastructs::AppConfig;
 use crate::exceptions::ConfigurationReadError;
 
 pub fn read_configuration_file() -> Result<AppConfig, ConfigurationReadError> {
-    let path: PathBuf = PathBuf::from("config/config.ron");
+    let path: PathBuf = PathBuf::from("../../../config/config.ron");
 
     if !path.exists() {
         return Err(ConfigurationReadError::new("The path to the configuration file doesn't exist."));

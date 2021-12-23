@@ -55,9 +55,9 @@ impl LocalSummary {
         if self.asks.is_empty() || self.bids.is_empty() {
             return 0.0;
         }
-        let top_ask: &LocalLevel = self.asks.get(0).unwrap();
-        let top_bid: &LocalLevel = self.bids.get(0).unwrap();
-        top_ask.price - top_bid.price
+        let top_ask: f64 = self.asks.get(0).unwrap().price;
+        let top_bid: f64 = self.bids.get(0).unwrap().price;
+        top_ask - top_bid
     }
 
     pub fn get_asks(&self) -> Vec<LocalLevel> {
