@@ -13,7 +13,7 @@ mod persistence;
 use std::net::SocketAddr;
 use exchanges::{open_stream_to_exchange, ExchangeEndpoint};
 use futures::StreamExt;
-use tonic::transport::Server;
+use tonic::transport::{Server, ServerTlsConfig};
 use crate::configuration::APP_CONFIG;
 
 use crate::exchanges::{Binance, BinanceData, Bitstamp, BitstampData, Exchange, ExchangeWsTcpStream};
@@ -77,10 +77,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Create and run the gRPC server
     dbg!("Running the gRPC server.");
-    let grpc_endpoint: SocketAddr = "127.0.0.1:50005".parse()?;
+    let grpc_endpoint: SocketAddr = "0.0.0.0:50005".parse()?;
     let grpc: OrderbookServer = OrderbookServer::new();
     let service = OrderbookAggregatorServer::new(grpc);
-    Server::builder().add_service(service).serve(grpc_endpoint).await?;
+    Server::builder()
+        .add_service(service)
+        .serve(grpc_endpoint)
+        .await?;
 
     Ok(())
 }
