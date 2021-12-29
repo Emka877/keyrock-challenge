@@ -13,7 +13,7 @@ mod persistence;
 use std::net::SocketAddr;
 use exchanges::{open_stream_to_exchange, ExchangeEndpoint};
 use futures::StreamExt;
-use tonic::transport::{Server, ServerTlsConfig};
+use tonic::transport::Server;
 use crate::configuration::APP_CONFIG;
 
 use crate::exchanges::{Binance, BinanceData, Bitstamp, BitstampData, Exchange, ExchangeWsTcpStream};
