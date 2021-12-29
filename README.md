@@ -32,3 +32,5 @@ Home of the gRPC server (wip)
 The merged orderbook's data and functions to create it
 ### tests
 All the tests for the above modules are here
+### web
+A web client to visualize the data sent by the gRPC server, see the [/web directory](web)
