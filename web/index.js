@@ -3,8 +3,6 @@ const grpc = require("@grpc/grpc-js");
 const grpcProtoLoader = require("@grpc/proto-loader");
 const path = require("path");
 const cors = require("cors");
-const app = express();
-const _ = require("lodash");
 
 const PORT = 50006;
 const REMOTE_ENDPOINT = "keyrock.oscur.io:50005";
@@ -37,6 +35,7 @@ readStream(stream);
 
 
 /** Web server **/
+const app = express();
 // Don't do this at home ↓
 app.use(cors({ origin: "*" }));
 app.use("/static", express.static(path.join(__dirname, "assets")));
@@ -46,8 +45,6 @@ app.get("/", (req, res, next) => {
 });
 
 app.get("/get_quotes", (req, res, next) => {
-    // console.log("Asking for cache...");
-    // console.log(cache);
     res.send({ data: cache });
 });
 

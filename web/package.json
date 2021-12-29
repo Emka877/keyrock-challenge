@@ -12,7 +12,6 @@
       "express": "4.17.2",
       "cors": "2.8.5",
       "@grpc/grpc-js": "1.4.5",
-      "@grpc/proto-loader": "0.6.7",
-      "lodash": "4.17.21"
+      "@grpc/proto-loader": "0.6.7"
   }
 }
