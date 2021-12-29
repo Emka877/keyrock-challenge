@@ -1,4 +1,3 @@
-use std::fmt::Formatter;
 use crate::grpc::orderbook::LocalLevel;
 use crate::LocalSummary;
 

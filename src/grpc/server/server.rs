@@ -20,7 +20,7 @@ impl OrderbookAggregator for OrderbookServer {
     type BookSummaryStream =
         Pin<Box<dyn Stream<Item = Result<Summary, Status>> + Send + Sync + 'static>>;
 
-    async fn book_summary(&self, request: Request<Empty>) -> Result<Response<Self::BookSummaryStream>, Status> {
+    async fn book_summary(&self, _: Request<Empty>) -> Result<Response<Self::BookSummaryStream>, Status> {
         dbg!("Incoming request to get the merged orderbook");
 
         let (tx, rx): (Sender<Result<Summary, Status>>, Receiver<Result<Summary, Status>>) = mpsc::channel(4);

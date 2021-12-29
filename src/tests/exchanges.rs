@@ -1,9 +1,8 @@
 use crate::{exchanges::{
     ExchangeEndpoint,
     open_stream_to_exchange,
-}, exceptions::OpenStreamError, ExchangeWsTcpStream, Bitstamp, Binance, NormalizedExchangeData, LocalSummary};
+}, exceptions::OpenStreamError, ExchangeWsTcpStream, Bitstamp, Binance, LocalSummary};
 use crate::exchanges::Exchange;
-use futures::{SinkExt, StreamExt};
 use tungstenite::Message;
 use crate::exceptions::StreamSubscriptionError;
 use super::common::*;
@@ -68,7 +67,7 @@ pub fn test_data_sorting_correctness() {
     data.prepare();
 
     // Test if sorting is ok (Bids from highest to lowest, asks from lowest to highest)
-    let mut prev_price: Option<f32> = None;
+    let mut prev_price: Option<f64> = None;
     for ask in data.get_asks().iter() {
         if prev_price.is_none() {
             prev_price = Some(ask.price);
