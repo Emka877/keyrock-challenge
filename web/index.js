@@ -3,12 +3,10 @@ const grpc = require("@grpc/grpc-js");
 const grpcProtoLoader = require("@grpc/proto-loader");
 const path = require("path");
 const cors = require("cors");
-const { assert } = require("console");
 const app = express();
 const _ = require("lodash");
-const { cp } = require("fs");
 
-const PORT = 3000;
+const PORT = 50006;
 const REMOTE_ENDPOINT = "keyrock.oscur.io:50005";
 const REMOTE_REQUEST_URI = "/orderbook.OrderbookAggregator/BookSummary";
 
