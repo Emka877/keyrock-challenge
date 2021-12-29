@@ -1,0 +1,25 @@
+// This schema is used by the gRPC server to stream the output merged orderbook.
+syntax = "proto3";
+
+package orderbook;
+
+service OrderbookAggregator {
+    rpc BookSummary(Empty) returns (stream Summary);
+}
+
+message Empty {}
+
+// Represents the streamed output
+// Top 10 Bids and Asks + spread between tops
+message Summary {
+    double spread = 1;
+    repeated Level bids = 2;
+    repeated Level asks = 3;
+}
+
+// Represents a single Bid or Ask
+message Level {
+    string exchange = 1;
+    double price = 2;
+    double amount = 3;
+}

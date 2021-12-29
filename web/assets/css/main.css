@@ -1,0 +1,27 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #464646;
+    color: white;
+}
+
+.quotes-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: 1fr; */
+    gap: 0 0;
+    grid-template-areas: ". .";
+}
+
+.quotes-data-root{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0 0;
+    grid-template-areas: ". . .";
+}
+
+.spread {
+    margin-top: 2em;
+    text-align: center;
+    font-size: 32px;
+}
