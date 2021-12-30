@@ -1,21 +1,44 @@
 console.log("main.js loaded.");
 
-// let queryDataButton = document.getElementById("btn-query-data");
+// DOM Elements
 let asksData = document.getElementById("asks-data");
 let bidsData = document.getElementById("bids-data");
 let spreadData = document.getElementById("spread-data");
 
-const QUERY_INTERVAL_MS = 200;
+// "Enums"
+const E_ASKS = "ask";
+const E_BIDS = "bid";
+
+// Data cache
+let currentAsks = null;
+let currentBids = null;
+let previousAsks = null;
+let previousBids = null;
+let previousSpread = null;
+let currentSpread = null;
+
+// Vars
+const QUERY_INTERVAL_MS = 1000;
 let query_timeout_object = null;
 
 function initialize() {
-    // queryDataButton.onclick = ((evt) => {
-    //     evt.preventDefault();
-    //     getQuotesFromServer();
-    // });
-
     getQuotesFromServer();
     query_timeout_object = setInterval(() => getQuotesFromServer(), QUERY_INTERVAL_MS);
+}
+
+function compareFloats(a, b) {
+    let difference = a - b;
+    if (difference < 0.0) {
+        return -1;
+    } else if (difference > 0.0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+function compareQuotesPrice(current, previous) {
+    return compareFloats(current.price, previous.price);
 }
 
 function quoteObjectToDOM(quote) {
@@ -28,10 +51,10 @@ function quoteObjectToDOM(quote) {
     exchange.innerHTML = quote.exchange;
     let price = document.createElement("div");
     price.className = "price";
-    price.innerHTML = quote.price;
+    price.innerHTML = quote.price.toFixed(8);
     let amount = document.createElement("div");
     amount.className = "amount";
-    amount.innerHTML = quote.amount;
+    amount.innerHTML = quote.amount.toFixed(8);
     
     // Merge it all
     element.appendChild(exchange);
@@ -49,24 +72,65 @@ function getQuotesFromServer() {
                 console.error("Response received from server, but data is empty!");
                 return;
             }
+
+            // Update data cache
+            previousAsks = currentAsks;
+            previousBids = currentBids;
+            currentAsks = res.data.asks;
+            currentBids = res.data.bids;
+            previousSpread = currentSpread;
+            currentSpread = res.data.spread;
             
-            // console.log(res.data);
-            
-            // asksData.innerHTML = JSON.stringify(res.data.asks);
-            // bidsData.innerHTML = JSON.stringify(res.data.bids);
             asksData.innerHTML = "";
-            res.data.asks.forEach(quote => {
+            currentAsks.forEach((quote, idx) => {
+                let previousQuoteSameSlot = null;
+                let comparisonResult = 0;
+                if (previousAsks) {
+                    previousQuoteSameSlot = previousAsks[idx];
+                    comparisonResult = compareQuotesPrice(quote, previousQuoteSameSlot);
+                }
+                
                 let dom = quoteObjectToDOM(quote).innerHTML;
-                asksData.innerHTML += "<div class='quotes-data-root'>" + dom + "</div>";
+                let classes = "quotes-data-root";
+                
+                if (comparisonResult === 1) {
+                    classes += " upwards";
+                } else if (comparisonResult === -1) {
+                    classes += " downwards";
+                }
+                
+                asksData.innerHTML += "<div class='" + classes + "'> " + dom + "</div>";
             });
 
             bidsData.innerHTML = "";
-            res.data.bids.forEach(quote => {
+            currentBids.forEach((quote, idx) => {
+                let previousQuoteSameSlot = null;
+                let comparisonResult = 0;
+                if (previousAsks) {
+                    previousQuoteSameSlot = previousBids[idx];
+                    comparisonResult = compareQuotesPrice(quote, previousQuoteSameSlot);
+                }
+
                 let dom = quoteObjectToDOM(quote).innerHTML;
-                bidsData.innerHTML += "<div class='quotes-data-root'>" + dom + "</div>";
+                let classes = "quotes-data-root";
+                
+                if (comparisonResult === 1) {
+                    classes += " upwards";
+                } else if (comparisonResult === -1) {
+                    classes += " downwards";
+                }
+                
+                bidsData.innerHTML += "<div class='" + classes + "'> " + dom + "</div>";
             });
 
-            spreadData.innerHTML = res.data.spread;
+            const spreadCompare = compareFloats(currentSpread, previousSpread);
+            let classes = "";
+            if (spreadCompare === 1) {
+                classes = "upwards";
+            } else if (spreadCompare === -1) {
+                classes = "downwards";
+            }
+            spreadData.innerHTML = "<span class='" + classes + "'>" + currentSpread + "</span>";
         })
         .catch(err => console.error(err));
 }

@@ -25,3 +25,36 @@ body {
     text-align: center;
     font-size: 32px;
 }
+
+/* Figures colour animation */
+.upwards {
+    animation: upwards-text-color 0.75s normal ease-out;
+}
+
+.downwards {
+    animation: downwards-text-color 0.75s normal ease-out;
+}
+
+@keyframes upwards-text-color {
+    0% {
+        color: green;
+    }
+    50% {
+        color: lightgreen;
+    }
+    100% {
+        color: white;
+    }
+}
+
+@keyframes downwards-text-color {
+    0% {
+        color: red;
+    }
+    50% {
+        color: lightpink;
+    }
+    100% {
+        color: white;
+    }
+}
