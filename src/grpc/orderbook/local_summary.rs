@@ -1,4 +1,4 @@
-use crate::grpc::orderbook::{LocalLevel, NormalizedExchangeData};
+use crate::{grpc::orderbook::{LocalLevel, NormalizedExchangeData}, configuration::APP_CONFIG};
 
 /// Represents the merged orderbook that's going to be streamed over the gRPC server.
 #[derive(Debug, Clone)]
@@ -46,8 +46,9 @@ impl LocalSummary {
 
     /// Trims the amount of asks and bids to 10 each
     fn trim(&mut self) {
-        self.asks.truncate(10);
-        self.bids.truncate(10);
+        let limit = APP_CONFIG.orderbook_entries_limit;
+        self.asks.truncate(limit);
+        self.bids.truncate(limit);
     }
 
     /// Calculates the spread between top ask and top bid

@@ -20,7 +20,7 @@ pub fn read_configuration_file() -> Result<AppConfig, ConfigurationReadError> {
 
     let file_handle = file_open_result.unwrap();
 
-    let app_config: AppConfig = match from_reader(file_handle) {
+    let mut app_config: AppConfig = match from_reader(file_handle) {
         Ok(config) => config,
         Err(error) => {
             return Err(
@@ -28,6 +28,10 @@ pub fn read_configuration_file() -> Result<AppConfig, ConfigurationReadError> {
             );
         }
     };
+
+    if app_config.orderbook_entries_limit == 0 {
+        app_config.orderbook_entries_limit = 10;
+    }
 
     Ok(app_config)
 }

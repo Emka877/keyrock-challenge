@@ -2,5 +2,7 @@
 
 AppConfig (
     // The default currencies pair to fetch from the exchanges
-    currency_pair: "ethbtc",
+    currency_pair: "btceur",
+    // Limits the amount of entries of the final merged OrderBook (x per asks and bids)
+    orderboor_entries_limit: 10,
 )
