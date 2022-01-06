@@ -65,7 +65,8 @@ function quoteObjectToDOM(quote) {
 }
 
 function getQuotesFromServer() {
-    fetch("http://keyrock-visual.oscur.io:50006/get_quotes")
+    // fetch("http://keyrock-visual.oscur.io:50006/get_quotes")
+    fetch("http://127.0.0.1:50006/get_quotes")
         .then(data => data.json())
         .then(res => {
             if (res.noDataCached) {

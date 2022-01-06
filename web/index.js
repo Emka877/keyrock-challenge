@@ -5,7 +5,11 @@ const path = require("path");
 const cors = require("cors");
 
 const PORT = 50006;
-const REMOTE_ENDPOINT = "keyrock.oscur.io:50005";
+let REMOTE_ENDPOINT = "keyrock.oscur.io:50005";
+if (process.env.NODE_ENV === "dev") {
+    console.log("Warning: Querying local orderbook");
+    REMOTE_ENDPOINT = "127.0.0.1:50005";
+}
 const REMOTE_REQUEST_URI = "/orderbook.OrderbookAggregator/BookSummary";
 
 /** GRPC client **/
