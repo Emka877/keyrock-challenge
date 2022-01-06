@@ -63,10 +63,12 @@ impl LocalSummary {
         (spread * fp_precision as f64).round() / fp_precision
     }
 
+    #[allow(dead_code)]
     pub fn get_asks(&self) -> Vec<LocalLevel> {
         self.asks.clone()
     }
 
+    #[allow(dead_code)]
     pub fn get_bids(&self) -> Vec<LocalLevel> {
         self.bids.clone()
     }
