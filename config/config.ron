@@ -2,5 +2,5 @@
 
 AppConfig (
     // The default currencies pair to fetch from the exchanges
-    currency_pair: "ethbtc",
+    currency_pair: "btceur",
 )

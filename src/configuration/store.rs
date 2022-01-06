@@ -10,6 +10,7 @@ fn initialize_config_store() -> AppConfig {
     let app_config: Result<AppConfig, ConfigurationReadError> = read_configuration_file();
 
     if app_config.is_err() {
+        println!("Error while reading the configuration file: {}", app_config.err().unwrap());
         return AppConfig::default();
     }
 

@@ -23,10 +23,21 @@ use crate::grpc::server::server::OrderbookServer;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("{}", APP_CONFIG.currency_pair);
     let mut bitstamp = open_stream_to_exchange(ExchangeEndpoint::Bitstamp).await.expect("Cannot open stream to Bitstamp.");
-    let _ = Bitstamp::subscribe_to_orderbook_stream(&mut bitstamp).await;
+    let bitstamp_sub_result: Result<Option<tungstenite::Message>, exceptions::StreamSubscriptionError> = 
+        Bitstamp::subscribe_to_orderbook_stream(&mut bitstamp).await;
     let mut binance = open_stream_to_exchange(ExchangeEndpoint::Binance).await.expect("Cannot open stream to Binance.");
-    let _ = Binance::subscribe_to_orderbook_stream(&mut binance).await;
+    let binance_sub_result: Result<Option<tungstenite::Message>, exceptions::StreamSubscriptionError> = 
+        Binance::subscribe_to_orderbook_stream(&mut binance).await;
+
+    if bitstamp_sub_result.is_err() {
+        println!("{}", bitstamp_sub_result.err().unwrap());
+    }
+
+    if binance_sub_result.is_err() {
+        println!("{}", binance_sub_result.err().unwrap());
+    }
 
     // Start the data gathering thread
     tokio::spawn(async move {

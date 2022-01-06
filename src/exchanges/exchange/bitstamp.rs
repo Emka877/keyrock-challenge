@@ -11,7 +11,7 @@ pub struct Bitstamp;
 #[async_trait]
 impl Exchange for Bitstamp {
     async fn subscribe_to_orderbook_stream(active_stream: &mut ExchangeWsTcpStream) -> Result<Option<Message>, StreamSubscriptionError> {
-        let currency_pair = format!("order_book_{}", APP_CONFIG.currency_pair.clone());
+        let currency_pair: String = format!("order_book_{}", APP_CONFIG.currency_pair.clone());
         let subscription_data: String = format!(r#"{{
             "event": "bts:subscribe",
             "data": {{"channel": "{}"}}
